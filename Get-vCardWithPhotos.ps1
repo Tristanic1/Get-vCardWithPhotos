@@ -14,7 +14,7 @@ If (!(Test-Path $filename)){
 }
 
 # Get AD Users from specified OU and build vCards
-Get-ADUser -SearchBase "OU=AD Users,DC=contoso,DC=com" -Filter {(Enabled -eq $true)} -ResultSetSize $null -Properties sn,givenName,displayName,company,department,title,telephoneNumber,mobile,mail | ForEach-Object {
+Get-ADUser -SearchBase "OU=AD Users,DC=contoso,DC=com" -Filter {(ObjectClass -eq "User") -and (Enabled -eq $true)} -ResultSetSize $null -Properties sn,givenName,displayName,company,department,title,telephoneNumber,mobile,mail | ForEach-Object {
             
             if ($_.telephoneNumber) {
                 
